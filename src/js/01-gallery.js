@@ -1,57 +1,35 @@
+// Описаний в документації
+import SimpleLightbox from 'simplelightbox';
+// Додатковий імпорт стилів
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 // Add imports above this line
 import { galleryItems } from './gallery-items';
-// import SimpleLightbox from 'simplelightbox';
 // Change code below this line
 
 const picElements = document.querySelector('.gallery');
+
 const markup = galleryItems
   .map(({ preview, original, description }) => {
-    return `<li style="margin: 30px"  class="gallery__item">
-        <a class="gallery__link" href="${original}">
-            <img
-                loading="lazy"
-                class="gallery__image"
-                src="${preview}"
-                data-source="${original}"
-                alt="${description}"
-            />
-        </a>
-    </li>`;
+    return `<li style="margin-top: 60px" "class="gallary__item">
+    <a class="gallary__link" href="${original}">
+    <img width="370" height="240"  class="gallary__image" src="${preview}" alt="${description}">
+    </a></li>`;
   })
   .join('');
-picElements.insertAdjacentHTML('beforeend', markup);
-let instance;
 
-const modalOpen = evt => {
-  evt.preventDefault();
-  if (!evt.target.classList.contains('gallery__image')) {
-    return;
-  }
-  const clickedImageAlt = evt.target.getAttribute('alt');
-  console.log(clickedImageAlt);
-  const clickedImageSrc = evt.target.dataset.source;
-  console.dir(clickedImageSrc);
+picElements.innerHTML = markup;
 
-  instance = basicLightbox.create(
-    `<img src='${clickedImageSrc}' alt='${clickedImageAlt}'/>`,
-    {
-      onShow: () => {
-        document.addEventListener('keydown', modalClose);
-      },
-      onClose: () => {
-        document.removeEventListener('keydown', modalClose);
-      },
-    }
-  );
-  instance.show();
-};
-
-const modalClose = evt => {
-  if (evt.key !== 'Escape') {
-    return;
-  }
-
-  instance.close();
-};
-
-picElements.addEventListener('click', modalOpen);
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 300,
+  captionSpeed: 250,
+  close: false,
+  closeText: 'closeMe',
+  captionPosition: 'bottom',
+  captionAlign: 'left',
+  captionEffect: 'fade',
+  navText: ['❤️', '💕'],
+  captionType: 'type',
+  swipeClose: true,
+});
