@@ -5,7 +5,18 @@ const feedbackForm = document.querySelector('.feedback-form');
 const emailInput = feedbackForm.querySelector('[name="email"]');
 const messageInput = feedbackForm.querySelector('[name="message"]');
 const sendBtn = feedbackForm.querySelector('button[type="submit"]');
-sendBtn.disabled = true;
+// sendBtn.disabled = true;
+
+sendBtn.addEventListener('click', stopBtn);
+function stopBtn(evt) {
+  if ((sendBtn.disabled = true)) {
+    sendBtn.style.backgroundColor = 'Red';
+    sendBtn.textContent = 'Refresh Page';
+  } else {
+    sendBtn.style.backgroundColor = 'none';
+  }
+  feedbackForm.reset();
+}
 
 //Disable empty spaces
 
