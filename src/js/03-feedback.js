@@ -36,6 +36,7 @@ const saveFormState = throttle(() => {
 
 emailInput.addEventListener('input', saveFormState);
 messageInput.addEventListener('input', saveFormState);
+
 //Got from LocalStorage
 const savedState = localStorage.getItem('feedback-form-state');
 
