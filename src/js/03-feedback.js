@@ -17,6 +17,7 @@ sendBtn.disabled = true;
 //   }
 //   feedbackForm.reset();
 // }
+
 //Disable empty spaces
 
 feedbackForm.addEventListener('input', function () {
@@ -51,6 +52,7 @@ feedbackForm.addEventListener('submit', event => {
     email: emailInput.value,
     message: messageInput.value,
   };
+  console.log(formState);
 
   localStorage.removeItem('feedback-form-state');
   emailInput.value = '';

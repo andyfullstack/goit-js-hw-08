@@ -7,6 +7,7 @@ player.on(
   'timeupdate',
   throttle(() => {
     player.getCurrentTime().then(time => {
+      localStorage.setItem('videoplayer-current-time', time);
       const minutes = Math.floor(time / 60);
       const seconds = Math.floor(time % 60);
       const goodTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
